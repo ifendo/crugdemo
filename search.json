@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "China Pharma RUG Meeting 2023 demo",
+    "section": "",
+    "text": "library(devtools)\n\nLoading required package: usethis\n\npackageVersion(\"devtools\")\n\n[1] '2.4.5'\n\n\n\n# update the path to your own\nusethis::create_package(\"~/Documents/projects/crugdemo\")"
+  },
+  {
+    "objectID": "index.html#use_r",
+    "href": "index.html#use_r",
+    "title": "China Pharma RUG Meeting 2023 demo",
+    "section": "2 use_r()",
+    "text": "2 use_r()\n\nuse_r(\"crug_skeleton\")"
+  },
+  {
+    "objectID": "index.html#add-project-template-metadata",
+    "href": "index.html#add-project-template-metadata",
+    "title": "China Pharma RUG Meeting 2023 demo",
+    "section": "3 Add project template metadata",
+    "text": "3 Add project template metadata\n\n# folder structure\ndir.create(\"inst/rstudio/templates/project\", recursive = TRUE, showWarnings = FALSE)\n\n# dcf: Debian control format\n\nfile.create(\"inst/rstudio/templates/project/crug_skeleton.dcf\")"
+  },
+  {
+    "objectID": "index.html#template-metadata-and-binding-function",
+    "href": "index.html#template-metadata-and-binding-function",
+    "title": "China Pharma RUG Meeting 2023 demo",
+    "section": "4 template metadata and binding function",
+    "text": "4 template metadata and binding function\n\ntemplate metadatabinding functionRStuido UItestdemo1\n\n\n\n\n\ncrug_skeleton.dcf\n\nBinding: crug_skeleton\nTitle: China Pharma RUG Demo\nOpenFiles: INDEX\nIcon: demo1.png\n\nParameter: with_git\nWidget: CheckboxInput\nLabel: Create a git repository\nDefault: On\nPosition: left\n\nParameter: with_renv\nWidget: CheckboxInput\nLabel: Use renv\nDefault: On\nPosition: right\n\nParameter: select\nWidget: SelectInput\nLabel: Output format\nFields: gitbook, bs4_book\nDefault: bs4_book\nPosition: left\n\nParameter: text\nWidget: TextInput\nLabel: Enter the Study number\nDefault: Study ABC1234567\nPosition: left\n\nParameter: file\nWidget: FileInput\nLabel: Please select a file\nDefault: ~/\nPosition: left\n\n\n\n\n\n\n\ncrug_skeleton.R\n\ncrug_skeleton <- function(path, ...) {\n    # ensure path exists\n    dir.create(path, recursive = TRUE, showWarnings = FALSE)\n\n    # generate header\n    header <- c(\n        \"# This file was generated when creating project using `crugdemo` template.\",\n        \"# The following inputs were received:\",\n        \"\"\n    )\n\n    # collect inputs\n    dots <- list(...)\n    text <- lapply(seq_along(dots), function(i) {\n        key <- names(dots)[[i]]\n        val <- dots[[i]]\n        paste0(key, \": \", val)\n    })\n\n    # collect into single text string\n    contents <- paste(\n        paste(header, collapse = \"\\n\"),\n        paste(text, collapse = \"\\n\"),\n        sep = \"\\n\"\n    )\n\n    # write to index file\n    writeLines(contents, con = file.path(path, \"INDEX\"))\n}"
+  },
+  {
+    "objectID": "index.html#check-and-install",
+    "href": "index.html#check-and-install",
+    "title": "China Pharma RUG Meeting 2023 demo",
+    "section": "5 check() and install()",
+    "text": "5 check() and install()\n\n5.1 check()\n\n\n\n5.2 install()"
+  },
+  {
+    "objectID": "index.html#final-product",
+    "href": "index.html#final-product",
+    "title": "China Pharma RUG Meeting 2023 demo",
+    "section": "6 final product",
+    "text": "6 final product\n\n6.1 RStudio UI\n\n\n\n6.2 testdemo1 project"
+  },
+  {
+    "objectID": "index.html#references",
+    "href": "index.html#references",
+    "title": "China Pharma RUG Meeting 2023 demo",
+    "section": "7 References",
+    "text": "7 References\nhttps://r-pkgs.org/whole-game.html#use_r\nhttps://openpharma.github.io/workshop-r-swe/listing.html\nhttps://github.com/rstudio/ptexamples"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "China Pharma RUG’s goal is to provide a platform for attendees to share knowledge and explore innovative solutions with R for pharmaceutical industry. This is the first conference of its kind, and we’re excited to bring together experts and professionals from across the industry to share their experiences and insights.\nFollow China Pharma RUG:"
+  }
+]
