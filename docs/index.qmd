@@ -1,0 +1,177 @@
+---
+title: "China Pharma RUG Meeting 2023 demo"
+format:
+    html: 
+        code-line-numbers: true
+        number-sections: true
+---
+
+## create R package using `usethis`
+
+```{r}
+library(devtools)
+packageVersion("devtools")
+```
+
+```{r}
+#| eval: false
+
+# update the path to your own
+usethis::create_package("~/Documents/projects/crugdemo")
+```
+
+![](images/create_package.png)
+
+
+## `use_r()`
+
+```{r}
+#| eval: false
+
+use_r("crug_skeleton")
+```
+
+![](images/use_r.png)
+
+## Add project template metadata
+
+```{r}
+#| eval: false
+
+# folder structure
+dir.create("inst/rstudio/templates/project", recursive = TRUE, showWarnings = FALSE)
+
+# dcf: Debian control format
+
+file.create("inst/rstudio/templates/project/crug_skeleton.dcf")
+```
+
+![](images/folder_structure.png)
+
+
+## template metadata and binding function
+
+:::{.panel-tabset}
+
+## template metadata
+
+```{default, filename="crug_skeleton.dcf"}
+#| eval: false
+
+Binding: crug_skeleton
+Title: China Pharma RUG Demo
+OpenFiles: INDEX
+Icon: demo1.png
+
+Parameter: with_git
+Widget: CheckboxInput
+Label: Create a git repository
+Default: On
+Position: left
+
+Parameter: with_renv
+Widget: CheckboxInput
+Label: Use renv
+Default: On
+Position: right
+
+Parameter: select
+Widget: SelectInput
+Label: Output format
+Fields: gitbook, bs4_book
+Default: bs4_book
+Position: left
+
+Parameter: text
+Widget: TextInput
+Label: Enter the Study number
+Default: Study ABC1234567
+Position: left
+
+Parameter: file
+Widget: FileInput
+Label: Please select a file
+Default: ~/
+Position: left
+
+```
+
+## binding function
+
+```{r, filename="crug_skeleton.R"}
+
+crug_skeleton <- function(path, ...) {
+    # ensure path exists
+    dir.create(path, recursive = TRUE, showWarnings = FALSE)
+
+    # generate header
+    header <- c(
+        "# This file was generated when creating project using `crugdemo` template.",
+        "# The following inputs were received:",
+        ""
+    )
+
+    # collect inputs
+    dots <- list(...)
+    text <- lapply(seq_along(dots), function(i) {
+        key <- names(dots)[[i]]
+        val <- dots[[i]]
+        paste0(key, ": ", val)
+    })
+
+    # collect into single text string
+    contents <- paste(
+        paste(header, collapse = "\n"),
+        paste(text, collapse = "\n"),
+        sep = "\n"
+    )
+
+    # write to index file
+    writeLines(contents, con = file.path(path, "INDEX"))
+}
+
+```
+
+## RStuido UI
+
+![](images/rstudio_ui.png)
+
+## `testdemo1`
+
+![](images/testdemo1.png)
+
+:::
+
+
+## `check()` and `install()`
+
+### `check()`
+
+![](images/check.png)
+
+
+### `install()`
+
+![](images/install.png)
+
+
+## final product
+
+### RStudio UI
+
+![](images/rstudio_ui.png)
+
+
+### `testdemo1` project
+
+![](images/testdemo1.png)
+
+
+
+## References
+
+<https://r-pkgs.org/whole-game.html#use_r>
+
+<https://openpharma.github.io/workshop-r-swe/listing.html>
+
+<https://github.com/rstudio/ptexamples>

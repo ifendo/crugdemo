@@ -1,0 +1,35 @@
+Binding: crug_skeleton
+Title: China Pharma RUG Demo
+OpenFiles: INDEX
+Icon: demo1.png
+
+Parameter: with_git
+Widget: CheckboxInput
+Label: Create a git repository
+Default: On
+Position: left
+
+Parameter: with_renv
+Widget: CheckboxInput
+Label: Use renv
+Default: On
+Position: right
+
+Parameter: select
+Widget: SelectInput
+Label: Output format
+Fields: gitbook, bs4_book
+Default: bs4_book
+Position: left
+
+Parameter: text
+Widget: TextInput
+Label: Enter the Study number
+Default: Study ABC1234567
+Position: left
+
+Parameter: file
+Widget: FileInput
+Label: Please select a file
+Default: ~/
+Position: left
